@@ -1,8 +1,7 @@
+import path from 'path';
+import fs from 'fs';
 import dataParse from './parser.js';
-
-const fs = require('fs');
-const path = require('path');
-const { cwd } = require('node:process');
+import { cwd } from 'process';
 
 const readFile = (filename) => {
   const currentDir = cwd();
@@ -15,5 +14,5 @@ export default (file1, file2) => {
   const fileData2 = readFile(file2);
 
   const parsingFile1 = dataParse(fileData1);
-  const parsingFile12 = dataParse(fileData2);
+  const parsingFile2 = dataParse(fileData2);
 };

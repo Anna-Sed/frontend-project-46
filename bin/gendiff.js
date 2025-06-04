@@ -9,8 +9,9 @@ program
   .option('-f, --format [type]', 'output format')
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
-    //вызов функции парсинга - вся работа с файлами должна происходить в отдельном модуле.
-    gendiff(filepath1, filepath2);
+    // вызов функции парсинга - вся работа с файлами должна происходить в отдельном модуле.
+    const result = gendiff(filepath1, filepath2);
+    console.log(result);
   })
 
 program.parse();
