@@ -1,3 +1,3 @@
 export default (data) => {
-    return JSON.parse(data);
-};
+    return JSON.parse(data)
+}
