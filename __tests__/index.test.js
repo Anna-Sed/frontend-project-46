@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import path from 'path'
 import fs from 'fs'
 import gendiff from '../src/index.js'
