@@ -1,16 +1,16 @@
 import path from 'path'
 import fs from 'fs'
 import gendiff from '../src/index.js'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 let getFixturePath
 let expected
 beforeEach(() => {
   getFixturePath = filename => path.join(__dirname, '..', '__fixtures__', filename)
-  expected = fs.readFileSync(getFixturePath('result.js'), 'utf-8')
+  expected = fs.readFileSync(getFixturePath('result.txt'), 'utf-8')
 })
 
 test('absolute path', () => {
@@ -19,8 +19,7 @@ test('absolute path', () => {
 })
 
 test('typeof', () => {
-  const result = gendiff('file1.json', 'file2.json')
+  const result = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json')
   expect(result).toEqual(expected.trim())
-  expect(typeof(result)).toBe('string')
+  expect(typeof result).toBe('string')
 })
-
