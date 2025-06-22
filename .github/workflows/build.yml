@@ -1,7 +1,7 @@
-Name of workflow
-name: build
+#Name of workflow
+name: Build
 
-Trigger the workflow on push or pull request
+#Trigger the workflow on push or pull request
 on:
     push:
       branches: main
