@@ -15,13 +15,21 @@ beforeEach(() => {
   expected = fs.readFileSync(getFixturePath('result.txt'), 'utf-8')
 })
 
-test('absolute path', () => {
+test('file type json', () => {
   const result = gendiff(getFixturePath('file1.json'), getFixturePath('file2.json'))
   expect(result).toEqual(expected.trim())
 })
 
-test('typeof', () => {
+test('typeof result', () => {
   const result = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json')
   expect(result).toEqual(expected.trim())
   expect(typeof result).toBe('string')
+})
+
+test('file type yaml and yml', () => {
+  const result = gendiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'))
+  expect(result).toEqual(expected.trim())
+
+  const newresult = gendiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'))
+  expect(newresult).toEqual(expected.trim())
 })
