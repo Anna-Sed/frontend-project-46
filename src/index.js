@@ -2,33 +2,9 @@ import path from 'path'
 import fs from 'fs'
 import parse from './parser.js'
 import getDifference from './treeBuilder.js'
+import stylishFormat from './formatters/stylish.js'
 import { cwd } from 'process'
 import _ from 'lodash'
-
-// const getDifference = (data1, data2) => {
-//   const keys1 = Object.keys(data1)
-//   const keys2 = Object.keys(data2)
-//   const keys = _.sortBy(_.union(keys1, keys2))
-
-//   const difference = keys.reduce((acc, key) => {
-//     if (!(key in data1)) {
-//       acc += '\n' + `  + ${key}: ${data2[key]}`
-//     }
-//     else if (!(key in data2)) {
-//       acc += '\n' + `  - ${key}: ${data1[key]}`
-//     }
-//     else if (data1[key] === data2[key]) {
-//       acc += '\n' + `    ${key}: ${data1[key]}`
-//     }
-//     else {
-//       acc += '\n' + `  - ${key}: ${data1[key]}`
-//       acc += '\n' + `  + ${key}: ${data2[key]}`
-//     }
-//     return acc
-//   }, '')
-//   const result = '{' + difference + '\n}'
-//   return result
-// }
 
 const getData = (filename) => {
   const filepath = path.resolve(cwd(), filename)
@@ -38,9 +14,12 @@ const getData = (filename) => {
   return data
 }
 
-const genDiff = (filename1, filename2) => { // тут нужно задать формат по умолчанию
+const genDiff = (filename1, filename2, type = 'stylish') => { // тут нужно задать формат по умолчанию
   const data1 = getData(filename1)
   const data2 = getData(filename2)
-  return getDifference(data1, data2) 
+  const difference = getDifference(data1, data2)
+  if (type === 'stylish') {
+    return stylishFormat(difference)
+  }
 }
 export default genDiff
