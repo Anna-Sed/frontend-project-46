@@ -21,8 +21,8 @@ const buildTree = (data1, data2) => {
       const value1 = data1[key];
       const value2 = data2[key];
       console.log('Текущий ключ = ', key)
-      console.log('Значение 1 = ', value1)
-      console.log('Значение 2 = ', value2)
+      // console.log('Значение 1 = ', value1)
+      // console.log('Значение 2 = ', value2)
       const node = createInitTree(key);
 
       if (key in data1 && key in data2) { 
@@ -64,15 +64,14 @@ const buildTree = (data1, data2) => {
             node.type = 'nested'
             node.status = 'modified'
             node.children = [
-            createInitTree(key, 'plain', 'deleted', [], value1),
+            createInitTree(key, 'plain', 'removed', [], value1),
             createInitTree(key, 'plain', 'added', [], value2),
           ];
         } 
         console.log('текущая нода если есть два ключа = ', node)
         return node;
       }
-
-      if (key in data1) {
+      else if (key in data1) {
         node.status = 'removed';
         if (_.isObject(value1)) {
           node.type = 'nested'
@@ -83,12 +82,11 @@ const buildTree = (data1, data2) => {
           node.value = value1;
         }
       }
-
-      if (key in data2) {
+      else if (key in data2) {
         node.status = 'added';
         if (_.isObject(value2)) {
           node.type = 'nested'
-          node.children = buildTree(value1, value2) 
+          node.children = buildTree({}, value2) 
         }
         else {
           node.type = 'plain';
