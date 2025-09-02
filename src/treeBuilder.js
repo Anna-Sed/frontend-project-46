@@ -39,28 +39,6 @@ const buildTree = (data1, data2) => {
           node.value = value1;
         }
         else if (value1 !== value2){
-          // если один простой, а второй - объект  
-          // if (_.isObject(value1) && !_.isObject(value2)) {
-          //   node.type = 'nested'
-          //   node.status = 'removed'
-          //   node.children = buildTree(value1, {})
-          //   return [
-          //     node,
-          //     createInitTree(key, 'plain', 'added', [], value2)
-          //   ]
-          // }
-          // else if (!_.isObject(value1) && _.isObject(value2)){
-          //   node.type = 'plain'
-          //   node.status = 'removed'
-          //   node.value = value1
-          //   
-          //   return [
-          //     node,
-          //     createInitTree(key, 'nested', 'added', [],buildTree({}, value2) )
-          //   ]
-          // }
-          // или оба простые
-          
             node.type = 'nested'
             node.status = 'modified'
             node.children = [
@@ -72,23 +50,25 @@ const buildTree = (data1, data2) => {
         return node;
       }
       else if (key in data1) {
-        node.status = 'removed';
         if (_.isObject(value1)) {
           node.type = 'nested'
+          node.status = 'modified'
           node.children = buildTree(value1, {})
         }
         else {
+          node.status = 'removed';
           node.type = 'plain';
           node.value = value1;
         }
       }
       else if (key in data2) {
-        node.status = 'added';
         if (_.isObject(value2)) {
+          node.status = 'modified'
           node.type = 'nested'
           node.children = buildTree({}, value2) 
         }
         else {
+          node.status = 'added';
           node.type = 'plain';
           node.value = value2;
         }
