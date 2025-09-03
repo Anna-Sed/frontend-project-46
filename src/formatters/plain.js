@@ -22,7 +22,7 @@ const createLine = (nodes, parentName = '') => {
     case 'removed':
       return `${startingPhrase} was removed\n`
     case 'nested':
-      return children.map(child => createLine(child, `currentPath.`)).join('')
+      return children.map(child => createLine(child, `${currentPath}.`)).join('')
     case 'changed':
       return `${startingPhrase} was updated. From ${getValue(value1)} to ${getValue(value2)}\n`
     default:
@@ -32,5 +32,5 @@ const createLine = (nodes, parentName = '') => {
 
 export default (diff) => {
   const lines = diff.map(node => createLine(node))
-  return lines.join('')
+  return lines.join('').trim()
 }
