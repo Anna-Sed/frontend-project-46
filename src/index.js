@@ -4,7 +4,7 @@ import parse from './parser.js'
 import getDifference from './treeBuilder.js'
 import stylishFormat from './formatters/stylish.js'
 import { cwd } from 'process'
-import _ from 'lodash'
+// import _ from 'lodash'
 
 const getData = (filename) => {
   const filepath = path.resolve(cwd(), filename)
