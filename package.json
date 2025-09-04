@@ -25,7 +25,7 @@
     "lodash": "^4.17.21"
   },
   "bin": {
-    "gendiff": "bin/gendiff.js"
+    "main": "src/index.js"
   },
   "devDependencies": {
     "@babel/core": "^7.27.4",
