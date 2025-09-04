@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 const getValue = (value) => {
-  if (_.isBoolean(value) || _.isNull(value)) {
+  if (_.isBoolean(value) || _.isNull(value) || _.isNumber(value)) {
     return value
   }
   else if (_.isString(value)) {
