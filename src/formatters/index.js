@@ -1,11 +1,11 @@
-import formatStylish from './stylish.js'
-import formatPlain from './plain.js'
+import stylish from './stylish.js'
+import plain from './plain.js'
+import json from './json.js'
 
-export default (diff, formatName) => {
-  if (formatName === 'stylish') {
-    return formatStylish(diff)
-  }
-  else if (formatName === 'plain') {
-    return formatPlain(diff)
-  }
+const formatters = {
+  stylish,
+  plain,
+  json,
 }
+
+export default (diff, formatName) => formatters[formatName](diff)

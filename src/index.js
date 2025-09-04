@@ -4,7 +4,6 @@ import parse from './parser.js'
 import getDifference from './treeBuilder.js'
 import format from './formatters/index.js'
 import { cwd } from 'process'
-// import _ from 'lodash'
 
 const getData = (filename) => {
   const filepath = path.resolve(cwd(), filename)
