@@ -1,10 +1,13 @@
 import yaml from 'js-yaml'
 
 export default (data, fileType) => {
-  if (fileType === '.json') {
-    return JSON.parse(data)
-  }
-  else if (fileType === '.yml' || fileType === '.yaml') {
-    return yaml.load(data)
+  switch (fileType) {
+    case '.json':
+      return JSON.parse(data)
+    case '.yml':
+    case '.yaml':
+      return yaml.load(data)
+    default:
+      throw new Error(`Unknown file type: ${fileType}`)
   }
 }
