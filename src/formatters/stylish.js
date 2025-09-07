@@ -43,18 +43,21 @@ const iter = (node, depth = 1) => {
   const { name, type, value, value1, value2, children } = node
   const symbol = specialSymbol[type]
 
+  if (!Object.hasOwn(specialSymbol, type)) throw new Error(`Unknown file type: ${type}`)
+
   if (type === 'changed') {
     const plus = specialSymbol.added
     const minus = specialSymbol.removed
     const removedValue = stringify(value1, depth + 1)
     const addedValue = stringify(value2, depth + 1)
-
     return `\n${indent}${minus}${name}: ${removedValue}\n${indent}${plus}${name}: ${addedValue}`
   }
+
   if (type === 'nested') {
     const nestedValue = children.map(child => iter(child, depth + 1)).join('')
     return `\n${indent}${symbol}${name}: {${nestedValue}\n${bracketIndent}}`
   }
+
   return `\n${indent}${symbol}${name}: ${stringify(value, depth + 1)}`
 }
 
